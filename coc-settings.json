@@ -57,7 +57,9 @@
     "list.nextKeymap": "<C-j>",
     "list.previousKeymap": "<C-k>",
     "snippets.ultisnips.directories": [
-        "$HOME/.config/nvim/plugged/vim-snippets/snippets/"
+        "$HOME/.config/nvim/plugged/vim-snippets/snippets/",
+        "$HOME/.config/nvim/Ultisnips"
+
     ],
     "coc.preferences.formatOnSaveFiletypes": ["python"],
     "yaml.format.enable": true,

@@ -15,15 +15,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 
-" ===
-" === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
-" ===
-let has_machine_specific_file = 1
-if empty(glob('~/.config/nvim/_machine_specific.vim'))
-	let has_machine_specific_file = 0
-	silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
-endif
-"source $XDG_CONFIG_HOME/nvim/_machine_specific.vim
 
 " Open the _machine_specific.vim file if it has just been created
 let g:python_host_prog='/usr/bin/python2'
@@ -31,7 +22,6 @@ let g:python3_host_prog='/usr/bin/python3'
 let g:mkdp_browser = 'chromium'
 let g:flutter_default_device = 'iPhone\ 11\ Pro'
 let g:ruby_host_prog='/home/matteo/.gem/ruby/2.7.0/bin/neovim-ruby-host'
-hi Normal  ctermfg=252 ctermbg=none
 
 " ====================
 " === Editor Setup ===
@@ -61,6 +51,7 @@ set expandtab
 set tabstop=4
 set shiftwidth=4
 set autoindent
+set smartindent
 set list
 set listchars=tab:\|\ ,trail:▫
 set scrolloff=5
@@ -85,7 +76,6 @@ set ignorecase
 set smartcase
 set incsearch
 set ruler
-"set paste
 set shortmess+=c
 set inccommand=split
 set encoding=utf-8              " 编码，使汉语正常显示
@@ -94,6 +84,7 @@ set completeopt=longest,noinsert,menuone,noselect,preview
 set ttyfast "should make scrolling faster
 set lazyredraw "same as above
 set visualbell
+"set paste
 silent !mkdir -p ~/.config/nvim/tmp/backup
 silent !mkdir -p ~/.config/nvim/tmp/undo
 set backupdir=~/.config/nvim/tmp/backup,.
@@ -149,6 +140,8 @@ noremap Q :q<CR>
 noremap <C-q> :qa<CR>
 noremap S :w<CR>
 
+noremap <LEADER>rr  :source $MYVIMRC<CR>
+
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
@@ -188,7 +181,6 @@ noremap <silent> L 5l
 " Open up lazygit
 noremap \g :Git
 noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
-"nnoremap <c-n> :tabe<CR>:-tabmove<CR>:term lazynpm<CR>
 
 " ===
 " === Insert Mode Cursor Movement
@@ -224,10 +216,10 @@ noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
 noremap sl :set splitright<CR>:vsplit<CR>
 
 " Resize splits with arrow keys
-noremap <up> :res +5<CR>
-noremap <down> :res -5<CR>
-noremap <left> :vertical resize-5<CR>
-noremap <right> :vertical resize+5<CR>
+noremap <up> :res +10<CR>
+noremap <down> :res -10<CR>
+noremap <left> :vertical resize-10<CR>
+noremap <right> :vertical resize+10<CR>
 
 " Place the two screens up and down
 noremap so <C-w>t<C-w>K
@@ -243,7 +235,7 @@ noremap <LEADER>q <C-w>j:q<CR>
 
 
 
-noremap <LEADER>m :verbose map
+noremap <LEADER>m :verbose map 
 
 " ===
 " === Tab management
@@ -258,12 +250,11 @@ noremap tmh :-tabmove<CR>
 noremap tml :+tabmove<CR>
 
 
-" sudo vim
-map <LEADER>sudo :w !sudo tee %
 
 " ===
 " === Markdown Settings
 " ===
+autocmd Filetype markdown inoremap <buffer> ,, ,,<backspace>
 autocmd Filetype markdown inoremap <buffer> ,f <Esc>/<++><CR>:nohlsearch<CR>"_c4l
 autocmd Filetype markdown inoremap <buffer> ,w <Esc>/ <++><CR>:nohlsearch<CR>"_c5l<CR>
 autocmd Filetype markdown inoremap <buffer> ,n ---<Enter><Enter>
@@ -272,14 +263,13 @@ autocmd Filetype markdown inoremap <buffer> ,s ~~~~ <++><Esc>F~hi
 autocmd Filetype markdown inoremap <buffer> ,i ** <++><Esc>F*i
 autocmd Filetype markdown inoremap <buffer> ,d `` <++><Esc>F`i
 autocmd Filetype markdown inoremap <buffer> ,c ```<Enter><++><Enter>```<Enter><Enter><++><Esc>4kA
-autocmd Filetype markdown inoremap <buffer> ,m - [ ]
+autocmd Filetype markdown inoremap <buffer> ,m - 
 autocmd Filetype markdown inoremap <buffer> ,p ![](<++>) <++><Esc>F[a
 autocmd Filetype markdown inoremap <buffer> ,a [](<++>) <++><Esc>F[a
 autocmd Filetype markdown inoremap <buffer> ,1 #<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> ,2 ##<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> ,3 ###<Space><Enter><++><Esc>kA
 autocmd Filetype markdown inoremap <buffer> ,4 ####<Space><Enter><++><Esc>kA
-autocmd Filetype markdown inoremap <buffer> ,l --------<Enter>
 " auto spell
 autocmd BufRead,BufNewFile *.md setlocal spell
 
@@ -291,7 +281,7 @@ autocmd BufRead,BufNewFile *.md setlocal spell
 nnoremap <LEADER>/ :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
 
 " Opening a terminal window
-noremap /t :set splitbelow<CR>:split<CR>:res -10<CR>:term<CR>
+noremap \t :set splitbelow<CR>:split<CR>:res -10<CR>:term<CR>
 
 
 " Press space twice to jump to the next '<++>' and edit it
@@ -313,7 +303,7 @@ autocmd BufEnter * silent! lcd %:p:h
 noremap fl :r !figlet
 
 " find and replace
-noremap \s :%s//<left>
+noremap \s :%s/
 
 
 " Compile function
@@ -371,17 +361,17 @@ call plug#begin('~/.config/nvim/plugged')
 
 
 " Pretty Dress
+Plug 'morhetz/gruvbox'
 Plug 'bpietravalle/vim-bolt'
 Plug 'theniceboy/vim-deus'
 Plug 'crusoexia/vim-monokai'
+Plug 'tomasr/molokai'
 Plug 'joshdick/onedark.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'arzg/vim-colors-xcode'
 Plug 'ryanoasis/vim-devicons'
 
-" 括号高亮匹配
-Plug 'kien/rainbow_parentheses.vim'
 
 " General Highlighter
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
@@ -470,14 +460,14 @@ Plug 'preservim/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'tpope/vim-surround' " type ysiw' to wrap the word with '' or type cs'` to change 'word' to `word`
-Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
-Plug 'junegunn/vim-after-object' " da= to delete what's after =
+Plug 'gcmt/wildfire.vim' " in Visual mode, enter 
+Plug 'junegunn/vim-after-object' " da= to delete what's after = 支持=:#-space
 Plug 'godlygeek/tabular' " tr, or :Tabularize <regex> to align
 Plug 'tpope/vim-capslock'	" Ctrl+L (insert) to toggle capslock
 Plug 'easymotion/vim-easymotion'
 Plug 'theniceboy/argtextobj.vim'
 Plug 'rhysd/clever-f.vim'
-Plug 'chrisbra/NrrwRgn'
+Plug 'chrisbra/NrrwRgn' "选中内容后:NR 会将选中的内容放到一个单独的缓冲区中 编辑完成后:w 将修改提交保存
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'szw/vim-maximizer'
@@ -487,7 +477,7 @@ Plug 'szw/vim-maximizer'
 "Plug 'wellle/context.vim'
 
 " Find & Replace
-"Plug 'brooth/far.vpim',
+Plug 'brooth/far.vim',
 
 " Mini Vim-APP
 "Plug 'mhinz/vim-startify'
@@ -502,20 +492,22 @@ Plug 'mg979/vim-xtabline'
 Plug 'wincent/terminus'
 
 " Other useful utilities
-Plug 'lambdalisue/suda.vim' " do stuff like :sudowrite
+Plug 'lambdalisue/suda.vim' " do stuff like :sw
 Plug 'theniceboy/vim-calc'
 " Plug 'makerj/vim-pdf'
 "Plug 'xolox/vim-session'
 "Plug 'xolox/vim-misc' " vim-session dep
 call plug#end()
 "*******************************************************
-
 set re=0
 
 " experimental
 set lazyredraw
 "set regexpengine=1
 
+let g:clever_f_across_no_line=1
+let g:clever_f_ignore_case=1
+let g:clever_f_smart_case=1
 
 let g:NERDSpaceDelims=1
 
@@ -526,12 +518,12 @@ set termguicolors " enable true colors support
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let g:airline#extensions#tabline#enabled = 1
 "let g:airline_theme='wombat'
-"set background=dark
+set background=dark
 "let ayucolor="mirage"
 "let g:oceanic_next_terminal_bold = 1
 "let g:oceanic_next_terminal_italic = 1
 "let g:one_allow_italics = 1
-"colorscheme monokai
+"color molokai
 "color deus
 color onedark
 "color gruvbox
@@ -541,7 +533,7 @@ color onedark
 "set background=light
 "set cursorcolumn
 hi NonText ctermfg=gray guifg=grey10
-
+let g:molokai_original = 1
 " ===================== Start of Plugin Settings =====================
 
 
@@ -596,7 +588,7 @@ let g:coc_snippet_next = '<tab>'
 inoremap <silent><expr> <c-space> coc#refresh()
 
 nmap <silent> <lEADER>- <Plug>(coc-diagnostic-prev)
-nmap <silent> <LEADER>+ <Plug>(coc-diagnostic-next)
+nmap <silent> <LEADER>= <Plug>(coc-diagnostic-next)
 
 nmap <leader>rn <Plug>(coc-rename)
 
@@ -605,12 +597,18 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" Remap for do codeAction of selected region
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
 endfunction
 xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
 nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
-
+" coctodolist
+nnoremap <leader>tn :CocCommand todolist.create<CR>
+nnoremap <leader>tl :CocList todolist<CR>
+nnoremap <leader>tu :CocCommand todolist.download<CR>:CocCommand todolist.upload<CR>
+" coc-tasks
+noremap <silent> <leader>tt :CocList tasks<CR>
 
 noremap <silent> <LEADER>H :call <SID>show_documentation()<CR>
 function! s:show_documentation()
@@ -624,20 +622,18 @@ function! s:show_documentation()
 endfunction
 
 nmap <C-c> :CocCommand<CR>
-nmap tt :CocCommand explorer<CR>
+nmap E :CocCommand explorer<CR>
 " coc-translator
 nmap ts <Plug>(coc-translator-p)
-
 " coc-snippets
 imap <C-l> <Plug>(coc-snippets-expand)
 vmap <C-e> <Plug>(coc-snippets-select)
-imap <C-e> <Plug>(coc-snippets-expand-jump)
 autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 
 " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
+nmap <leader>cc  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+nmap <leader>cf  <Plug>(coc-fix-current)
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
 xmap if <Plug>(coc-funcobj-i)
@@ -648,7 +644,6 @@ xmap ic <Plug>(coc-classobj-i)
 omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
-
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
@@ -698,6 +693,10 @@ noremap <silent> <C-h> :Leaderf mru<CR>
 noremap <silent> <C-b> :Leaderf buffer<CR>
 noremap <silent> <C-w> :Leaderf rg<CR>
 noremap <silent> <c-f> :Leaderf function<CR>
+" noremap <silent> <C-f> :Rg<CR>
+" noremap <silent> <C-h> :History<CR>
+" noremap <silent> <C-l> :Lines<CR>
+" noremap <silent> <C-w> :Buffers<CR>
 noremap <leader>; :History:<CR>
 
 let g:fzf_preview_window = 'right:60%'
@@ -778,8 +777,7 @@ let g:Lf_UseCache = 0
 " ===
 " === vim-calc
 " ===
-noremap <LEADER>a :call Calc()<CR>
-
+ noremap <LEADER>cc :call Calc()<CR>
 " Startify
 let g:startify_lists = [
       \ { 'type': 'files',     'header': ['   MRU']            },
@@ -864,6 +862,7 @@ nnoremap \f :Autoformat<CR>
 " ===
 " === Gitgutter
 " ===
+nmap ]c :GitGutterNextHunk<CR>
 nmap [c :GitGutterPrevHunk<CR>
 nmap ghs <Plug>(GitGutterStageHunk)
 nmap ghu <Plug>(GitGutterUndoHunk)
@@ -937,7 +936,8 @@ let g:vim_jsx_pretty_colorful_config = 1
 " ===
 " === tabular
 " ===
-vmap tr :Tabularize /
+" 视图模式下按指定符号对齐
+vmap dq :Tabularize /
 
 
 " ===
@@ -968,7 +968,6 @@ noremap \p :XTabInfo<CR>
 " ===
 " === suda.vim
 " ===
-cnoreabbrev sudowrite w suda://%
 cnoreabbrev sw w suda://%
 
 
@@ -990,7 +989,6 @@ sign define vimspectorBP text=☛ texthl=Normal
 sign define vimspectorBPDisabled text=☞ texthl=Normal
 sign define vimspectorPC text=🔶 texthl=SpellBad
 
-
 " ===
 " === vim-markdown-toc
 " ===
@@ -1000,7 +998,7 @@ let g:vmt_cycle_list_item_markers = 1
 let g:vmt_fence_text = 'TOC'
 let g:vmt_fence_closing_text = '/TOC'
 
-nnoremap <silent><tab> :MaximizerToggle<CR>
+nnoremap <silent><leader><tab> :MaximizerToggle<CR>
 
 " ===
 " === rnvimr
@@ -1010,7 +1008,7 @@ let g:rnvimr_pick_enable = 1
 let g:rnvimr_draw_border = 0
 " let g:rnvimr_bw_enable = 1
 highlight link RnvimrNormal CursorLine
-nnoremap <silent> R :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
+nnoremap <silent> R :RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
 let g:rnvimr_action = {
             \ '<C-t>': 'NvimEdit tabedit',
             \ '<C-x>': 'NvimEdit split',
@@ -1085,7 +1083,3 @@ let g:agit_no_default_mappings = 1
 exec "nohlsearch"
 
 
-" Open the _machine_specific.vim file if it has just been created
-if has_machine_specific_file == 0
-	exec "e ~/.config/nvim/_machine_specific.vim"
-endif
