@@ -197,7 +197,6 @@ cnoremap <C-l> <Right>
 " === Window management
 " ===
 " Use <space> + new arrow keys for moving the cursor around windows
-noremap <LEADER>w <C-w>w
 noremap <LEADER>k <C-w>k
 noremap <LEADER>j <C-w>j
 noremap <LEADER>h <C-w>h
@@ -418,7 +417,6 @@ Plug 'othree/html5.vim'
 Plug 'alvan/vim-closetag'
 Plug 'hail2u/vim-css3-syntax' " , { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'jaxbot/browserlink.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
@@ -937,6 +935,13 @@ endfunction
 let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_do_shade = 0
 let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader><leader>j <Plug>(easymotion-j)
+map <Leader><leader>k <Plug>(easymotion-k)
+map <Leader>w <Plug>(easymotion-w)
+map <Leader>b <Plug>(easymotion-b)
+map <Leader>s <Plug>(easymotion-s)
 
 
 " ===
