@@ -48,8 +48,8 @@ set number
 set relativenumber
 set cursorline
 set expandtab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set autoindent
 set smartindent
 set list
@@ -137,16 +137,13 @@ noremap ; :
 
 " Save & quit
 noremap Q :q<CR>
-noremap <C-q> :qa<CR>
+noremap <C-q> :q!<CR>
 noremap S :w<CR>
 
 noremap <LEADER>rr  :source $MYVIMRC<CR>
 
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
-
-" Open Startify
-noremap <LEADER>sf :Startify<CR>
 
 
 " make Y to copy till the end of the line
@@ -216,10 +213,10 @@ noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
 noremap sl :set splitright<CR>:vsplit<CR>
 
 " Resize splits with arrow keys
-noremap <up> :res +10<CR>
-noremap <down> :res -10<CR>
-noremap <left> :vertical resize-10<CR>
-noremap <right> :vertical resize+10<CR>
+noremap <up> :res +5<CR>
+noremap <down> :res -5<CR>
+noremap <left> :vertical resize-5<CR>
+noremap <right> :vertical resize+5<CR>
 
 " Place the two screens up and down
 noremap so <C-w>t<C-w>K
@@ -249,7 +246,8 @@ noremap tl :+tabnext<CR>
 noremap tmh :-tabmove<CR>
 noremap tml :+tabmove<CR>
 
-
+" let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      " \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " ===
 " === Markdown Settings
@@ -285,7 +283,7 @@ noremap \t :set splitbelow<CR>:split<CR>:res -10<CR>:term<CR>
 
 
 " Press space twice to jump to the next '<++>' and edit it
-noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
+noremap MM <Esc>/<++><CR>:nohlsearch<CR>c4l
 
 " Spelling Check with <space>sc
 noremap <LEADER>sc :set spell!<CR>
@@ -392,14 +390,12 @@ Plug 'liuchengxu/vista.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wellle/tmux-complete.vim'
 
-" Snippets
-Plug 'honza/vim-snippets'
 
 " Undo Tree
 Plug 'mbbill/undotree'
 
-
-
+" Wiki
+" Plug 'vimwiki/vimwiki'
 
 " Git
 Plug 'fszymanski/fzf-gitignore', { 'do': ':UpdateRemotePlugins' }
@@ -422,6 +418,9 @@ Plug 'othree/html5.vim'
 Plug 'alvan/vim-closetag'
 Plug 'hail2u/vim-css3-syntax' " , { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+Plug 'jaxbot/browserlink.vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 "Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 " Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
@@ -477,7 +476,7 @@ Plug 'szw/vim-maximizer'
 "Plug 'wellle/context.vim'
 
 " Find & Replace
-Plug 'brooth/far.vim',
+"Plug 'brooth/far.vim',
 
 " Mini Vim-APP
 "Plug 'mhinz/vim-startify'
@@ -551,15 +550,15 @@ let g:coc_global_extensions = [
 	\ 'coc-html',
 	\ 'coc-json',
 	\ 'coc-lists',
+	\ 'coc-eslint',
 	\ 'coc-prettier',
 	\ 'coc-python',
 	\ 'coc-phpls',
 	\ 'coc-snippets',
 	\ 'coc-sourcekit',
 	\ 'coc-stylelint',
+    \ 'coc-tsserver',
 	\ 'coc-translator',
-	\ 'coc-tslint-plugin',
-	\ 'coc-tsserver',
 	\ 'coc-vimlsp',
 	\ 'coc-vetur',
 	\ 'coc-yaml',
@@ -571,24 +570,37 @@ function! s:check_back_space() abort
 	return !col || getline('.')[col - 1]	=~ '\s'
 endfunction
 
+" tab直接输出
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? coc#_select_confirm() :
       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 
+" tab
+" inoremap <silent><expr> <TAB>
+      " \ pumvisible() ? "\<C-n>" :
+      " \ <SID>check_back_space() ? "\<TAB>" :
+      " \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 let g:coc_snippet_next = '<tab>'
 
+set hidden
 
 inoremap <silent><expr> <c-space> coc#refresh()
 
-nmap <silent> <lEADER>- <Plug>(coc-diagnostic-prev)
-nmap <silent> <LEADER>= <Plug>(coc-diagnostic-next)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 nmap <leader>rn <Plug>(coc-rename)
 
@@ -610,6 +622,11 @@ nnoremap <leader>tu :CocCommand todolist.download<CR>:CocCommand todolist.upload
 " coc-tasks
 noremap <silent> <leader>tt :CocList tasks<CR>
 
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+vmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
 noremap <silent> <LEADER>H :call <SID>show_documentation()<CR>
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -623,6 +640,7 @@ endfunction
 
 nmap <C-c> :CocCommand<CR>
 nmap E :CocCommand explorer<CR>
+
 " coc-translator
 nmap ts <Plug>(coc-translator-p)
 " coc-snippets
@@ -693,6 +711,7 @@ noremap <silent> <C-h> :Leaderf mru<CR>
 noremap <silent> <C-b> :Leaderf buffer<CR>
 noremap <silent> <C-w> :Leaderf rg<CR>
 noremap <silent> <c-f> :Leaderf function<CR>
+" noremap <silent> <C-p> :Files<CR>
 " noremap <silent> <C-f> :Rg<CR>
 " noremap <silent> <C-h> :History<CR>
 " noremap <silent> <C-l> :Lines<CR>
@@ -752,7 +771,7 @@ endfunc
 " ===
 " === Far.vim
 " ===
-noremap <LEADER>f :Far  %<left>
+" noremap <LEADER>f :Far  %<left>
 
 " ===
 " === Leaderf
@@ -1059,8 +1078,6 @@ let g:dart_format_on_save = 1
 let g:dartfmt_options = ["-l 100"]
 
 
-"emmet tab
-"imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 
 
 " ===
@@ -1081,5 +1098,4 @@ let g:agit_no_default_mappings = 1
 " === Necessary Commands to Execute
 " ===
 exec "nohlsearch"
-
 
