@@ -297,7 +297,9 @@ autocmd BufEnter * silent! lcd %:p:h
 
 " Call figlet
 " 输出颜文字
-noremap fl :r !figlet
+noremap fl :r !figlet 
+
+
 
 " find and replace
 noremap \s :%s/
@@ -555,7 +557,7 @@ let g:coc_global_extensions = [
 	\ 'coc-snippets',
 	\ 'coc-sourcekit',
 	\ 'coc-stylelint',
-    \ 'coc-tsserver',
+  \ 'coc-tsserver',
 	\ 'coc-translator',
 	\ 'coc-vimlsp',
 	\ 'coc-vetur',
@@ -575,7 +577,7 @@ inoremap <silent><expr> <TAB>
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
 
-" tab
+" tab选择
 " inoremap <silent><expr> <TAB>
       " \ pumvisible() ? "\<C-n>" :
       " \ <SID>check_back_space() ? "\<TAB>" :
@@ -646,8 +648,6 @@ imap <C-l> <Plug>(coc-snippets-expand)
 vmap <C-e> <Plug>(coc-snippets-select)
 autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
 
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>cc  <Plug>(coc-codeaction)
 " Apply AutoFix to problem on the current line.
 nmap <leader>cf  <Plug>(coc-fix-current)
 " Map function and class text objects
@@ -794,7 +794,7 @@ let g:Lf_UseCache = 0
 " ===
 " === vim-calc
 " ===
- noremap <LEADER>cc :call Calc()<CR>
+noremap <LEADER>clc :call Calc()<CR>
 " Startify
 let g:startify_lists = [
       \ { 'type': 'files',     'header': ['   MRU']            },
@@ -967,7 +967,7 @@ vmap dq :Tabularize /
 " ===
 " === vim-after-object
 " ===
-autocmd VimEnter * call after_object#enable('=', ':', '-', '#', ' ')
+autocmd VimEnter * call after_object#enable('=',",",':', '-', '#', ' ')
 
 
 " ===
