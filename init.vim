@@ -1,4 +1,3 @@
-
 " __  ____   ___   ___     _____ __  __ 
 "|  \/  \ \ / / \ | \ \   / /_ _|  \/  |
 "| |\/| |\ V /|  \| |\ \ / / | || |\/| |
@@ -141,6 +140,7 @@ noremap <C-q> :q!<CR>
 noremap S :w<CR>
 
 noremap <LEADER>rr  :source $MYVIMRC<CR>
+noremap <LEADER>u  :PlugInstall<CR>
 
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
@@ -417,7 +417,7 @@ Plug 'elzr/vim-json'
 Plug 'neoclide/jsonc.vim'
 Plug 'othree/html5.vim'
 Plug 'alvan/vim-closetag'
-Plug 'hail2u/vim-css3-syntax' " , { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+Plug 'hail2u/vim-css3-syntax'  , { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'sheerun/vim-polyglot'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -425,8 +425,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 "Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 " Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 " Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-"Plug 'jaxbot/browserlink.vim'
-Plug 'HerringtonDarkholme/yats.vim'
+Plug 'jaxbot/browserlink.vim'
 Plug 'posva/vim-vue'
 
 " Go
@@ -439,7 +438,7 @@ Plug 'tweekmonster/braceless.vim', { 'for' :['python', 'vim-plug'] }
 " Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
 "Plug 'vim-scripts/indentpython.vim', { 'for' :['python', 'vim-plug'] }
 "Plug 'plytophogy/vim-virtualenv', { 'for' :['python', 'vim-plug'] }
-
+"
 " Flutter
 Plug 'dart-lang/dart-vim-plugin'
 
@@ -558,7 +557,7 @@ let g:coc_global_extensions = [
 	\ 'coc-sourcekit',
 	\ 'coc-stylelint',
   \ 'coc-tsserver',
-	\ 'coc-translator',
+  \ 'coc-translator',
 	\ 'coc-vimlsp',
 	\ 'coc-vetur',
 	\ 'coc-yaml',
@@ -665,7 +664,6 @@ omap ac <Plug>(coc-classobj-a)
 " Requires 'textDocument/selectionRange' support of language server.
 nmap <silent> <C-s> <Plug>(coc-range-select)
 xmap <silent> <C-s> <Plug>(coc-range-select)
-
 
 " ===
 " === MarkdownPreview
@@ -939,15 +937,14 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader><leader>j <Plug>(easymotion-j)
 map <Leader><leader>k <Plug>(easymotion-k)
-map <Leader>w <Plug>(easymotion-w)
-map <Leader>b <Plug>(easymotion-b)
-map <Leader>s <Plug>(easymotion-s)
+map <Leader><leader>h <Plug>(easymotion-linebackward)
+map <Leader><leader>l <Plug>(easymotion-lineforward)
+map <Leader><leader>w <Plug>(easymotion-w)
+map <Leader><leader>b <Plug>(easymotion-b)
+map <Leader><leader>s <Plug>(easymotion-s)
 
 
-" ===
-" === goyo
-" ===
-map <LEADER>gy :Goyo<CR>
+
 
 
 " ===

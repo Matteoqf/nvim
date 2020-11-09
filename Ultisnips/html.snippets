@@ -2,6 +2,16 @@ snippet cl "console.log()"
 console.log(${1});
 endsnippet
 
+snippet rdm "random"
+Math.floor(Math.random()*${1});
+endsnippet
+
+snippet for "for(let i=0;i<arr.length-1;i++>)"
+for (let i = 0; i < ${1:arr}.length - 1; i++) {
+	${2}
+}
+endsnippet
+
 snippet ijq "jquery.js"
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.3.0/jquery.js"></script>
 endsnippet

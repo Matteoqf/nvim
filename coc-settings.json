@@ -57,11 +57,14 @@
     "list.nextKeymap": "<C-j>",
     "list.previousKeymap": "<C-k>",
     "snippets.ultisnips.directories": [
-        "$HOME/.config/nvim/Ultisnips"
+//        "$HOME/.config/nvim/plugged/vim-snippets/snippets/",
+        "$HOME/.config/nvim/Ultisnips/"
 
     ],
     "coc.preferences.formatOnSaveFiletypes": ["markdown"],
     "emmet.priority": 3,
+    "suggest.languageSourcePriority": 4,
+    "snippets.priority": 10,
     "yaml.format.enable": true,
     "signature.target": "float",
     "yank.enableCompletion": false,
@@ -130,11 +133,11 @@
         "gf": "gotoSource:file",
         "gb": "gotoSource:buffer",
         "[d": "diagnosticPrev",
-            "]d": "diagnosticNext",
-            "[c": "gitPrev",
-                "]c": "gitNext",
-                "<<": "gitStage",
-                ">>": "gitUnstage"
+        "]d": "diagnosticNext",
+        "[c": "gitPrev",
+        "]c": "gitNext",
+        "<<": "gitStage",
+        ">>": "gitUnstage"
     },
     "git.enableGutters": true,
     "git.branchCharacter": "\uf408",
@@ -162,6 +165,7 @@
         "{SPACES_AROUND_POWER_OPERATOR: True, SPACES_BEFORE_COMMENT: 1}"
     ],
     "html.format.enable": true,
+    "eslint.autoFixOnSave": true,
     "javascript.referencesCodeLens.enable": true,
     "javascript.showUnused": true,
     "javascript.suggest.names": true,
