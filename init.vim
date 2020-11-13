@@ -137,10 +137,11 @@ noremap ; :
 " Save & quit
 noremap Q :q<CR>
 noremap <C-q> :q!<CR>
-noremap S :w<CR>
+noremap D :w<CR>
 
-noremap <LEADER>rr  :source $MYVIMRC<CR>
+
 noremap <LEADER>u  :PlugInstall<CR>
+noremap <LEADER>rr :source $MYVIMRC<CR>
 
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
@@ -152,7 +153,7 @@ nnoremap Y y$
 " Copy to system clipboard
 vnoremap Y "+y
 
-" Indentation
+"/ Indentation
 nnoremap < <<
 nnoremap > >>
 
@@ -377,7 +378,7 @@ Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'RRethy/vim-illuminate'
 
 " 标签高亮
-Plug 'Valloric/MatchTagAlways'
+"Plug 'Valloric/MatchTagAlways'
 " File navigation
 Plug 'junegunn/fzf.vim'
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
@@ -419,14 +420,14 @@ Plug 'othree/html5.vim'
 Plug 'alvan/vim-closetag'
 Plug 'hail2u/vim-css3-syntax'  , { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'sheerun/vim-polyglot'
+Plug 'posva/vim-vue'
+Plug 'jaxbot/browserlink.vim'
+"Plug 'sheerun/vim-polyglot'
 Plug 'nathanaelkane/vim-indent-guides'
 " Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 "Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 " Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 " Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'jaxbot/browserlink.vim'
-Plug 'posva/vim-vue'
 
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
@@ -455,7 +456,7 @@ Plug 'dkarter/bullets.vim'
 " Editor Enhancement
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdcommenter'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'AndrewRadev/switch.vim' " gs to switch
 Plug 'tpope/vim-surround' " type ysiw' to wrap the word with '' or type cs'` to change 'word' to `word`
 Plug 'gcmt/wildfire.vim' " in Visual mode, enter 
@@ -506,9 +507,12 @@ set lazyredraw
 let g:clever_f_across_no_line=1
 let g:clever_f_ignore_case=1
 let g:clever_f_smart_case=1
-
+"colorscheme tir_black
+"set ts=2 sw=2 et
+let g:indent_guides_start_level= 2
+let g:indent_guides_guide_size= 1
+let g:indent_guides_enable_on_vim_startup = 1
 let g:NERDSpaceDelims=1
-
 " ===
 " === Dress up my vim
 " ===
@@ -523,8 +527,8 @@ set background=dark
 "let g:one_allow_italics = 1
 "color molokai
 "color deus
-color onedark
-"color gruvbox
+"color onedark
+color gruvbox
 "let ayucolor="light"
 "color ayu
 "color xcodelighthc
@@ -555,7 +559,7 @@ let g:coc_global_extensions = [
 	\ 'coc-phpls',
 	\ 'coc-snippets',
 	\ 'coc-sourcekit',
-	\ 'coc-stylelint',
+	\ 'coc-stylelintplus',
   \ 'coc-tsserver',
   \ 'coc-translator',
 	\ 'coc-vimlsp',
@@ -942,8 +946,6 @@ map <Leader><leader>l <Plug>(easymotion-lineforward)
 map <Leader><leader>w <Plug>(easymotion-w)
 map <Leader><leader>b <Plug>(easymotion-b)
 map <Leader><leader>s <Plug>(easymotion-s)
-
-
 
 
 
