@@ -14,7 +14,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 
-
 " Open the _machine_specific.vim file if it has just been created
 let g:python_host_prog='/usr/bin/python2'
 let g:python3_host_prog='/usr/bin/python3'
@@ -183,7 +182,7 @@ noremap <c-g> :tabe<CR>:-tabmove<CR>:term lazygit<CR>
 " ===
 " === Insert Mode Cursor Movement
 " ===
-inoremap <C-a> <ESC>A
+"inoremap <C-a> <ESC>A
 
 " Move the next character to the end of the line with ctrl+9
 inoremap <C-k> <ESC>lx$p
@@ -231,7 +230,6 @@ noremap srp <C-w>b<C-w>H
 noremap <LEADER>q <C-w>j:q<CR>
 
 
-
 noremap <LEADER>m :verbose map 
 
 " ===
@@ -253,21 +251,21 @@ noremap tml :+tabmove<CR>
 " === Markdown Settings
 " ===
 autocmd Filetype markdown inoremap <buffer> ,, ,,<backspace>
-autocmd Filetype markdown inoremap <buffer> ,f <Esc>/<++><CR>:nohlsearch<CR>"_c4l
-autocmd Filetype markdown inoremap <buffer> ,w <Esc>/ <++><CR>:nohlsearch<CR>"_c5l<CR>
+autocmd Filetype markdown inoremap <buffer> ,f <Esc>/<?><CR>:nohlsearch<CR>"_c4l
+autocmd Filetype markdown inoremap <buffer> ,w <Esc>/ <?><CR>:nohlsearch<CR>"_c5l<CR>
 autocmd Filetype markdown inoremap <buffer> ,n ---<Enter><Enter>
-autocmd Filetype markdown inoremap <buffer> ,b **** <++><Esc>F*hi
-autocmd Filetype markdown inoremap <buffer> ,s ~~~~ <++><Esc>F~hi
-autocmd Filetype markdown inoremap <buffer> ,i ** <++><Esc>F*i
-autocmd Filetype markdown inoremap <buffer> ,d `` <++><Esc>F`i
-autocmd Filetype markdown inoremap <buffer> ,c ```<Enter><++><Enter>```<Enter><Enter><++><Esc>4kA
+autocmd Filetype markdown inoremap <buffer> ,b **** <?><Esc>F*hi
+autocmd Filetype markdown inoremap <buffer> ,s ~~~~ <?><Esc>F~hi
+autocmd Filetype markdown inoremap <buffer> ,i ** <?><Esc>F*i
+autocmd Filetype markdown inoremap <buffer> ,d `` <?><Esc>F`i
+autocmd Filetype markdown inoremap <buffer> ,c ```<Enter><?><Enter>```<Enter><Enter><?><Esc>4kA
 autocmd Filetype markdown inoremap <buffer> ,m - 
-autocmd Filetype markdown inoremap <buffer> ,p ![](<++>) <++><Esc>F[a
-autocmd Filetype markdown inoremap <buffer> ,a [](<++>) <++><Esc>F[a
-autocmd Filetype markdown inoremap <buffer> ,1 #<Space><Enter><++><Esc>kA
-autocmd Filetype markdown inoremap <buffer> ,2 ##<Space><Enter><++><Esc>kA
-autocmd Filetype markdown inoremap <buffer> ,3 ###<Space><Enter><++><Esc>kA
-autocmd Filetype markdown inoremap <buffer> ,4 ####<Space><Enter><++><Esc>kA
+autocmd Filetype markdown inoremap <buffer> ,p ![](<?>) <?><Esc>F[a
+autocmd Filetype markdown inoremap <buffer> ,a [](<?>) <?><Esc>F[a
+autocmd Filetype markdown inoremap <buffer> ,1 #<Space><Enter><?><Esc>kA
+autocmd Filetype markdown inoremap <buffer> ,2 ##<Space><Enter><?><Esc>kA
+autocmd Filetype markdown inoremap <buffer> ,3 ###<Space><Enter><?><Esc>kA
+autocmd Filetype markdown inoremap <buffer> ,4 ####<Space><Enter><?><Esc>kA
 " auto spell
 autocmd BufRead,BufNewFile *.md setlocal spell
 
@@ -282,8 +280,7 @@ nnoremap <LEADER>/ :tabe<CR>:-tabmove<CR>:term sh -c 'st'<CR><C-\><C-N>:q<CR>
 noremap \t :set splitbelow<CR>:split<CR>:res -10<CR>:term<CR>
 
 
-" Press space twice to jump to the next '<++>' and edit it
-noremap MM <Esc>/<++><CR>:nohlsearch<CR>c4l
+noremap MM <Esc>/<?><CR>:nohlsearch<CR>c4l
 
 " Spelling Check with <space>sc
 noremap <LEADER>sc :set spell!<CR>
@@ -424,6 +421,8 @@ Plug 'posva/vim-vue'
 Plug 'jaxbot/browserlink.vim'
 "Plug 'sheerun/vim-polyglot'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'KabbAmine/vCoolor.vim'
+Plug 'honza/vim-snippets'
 " Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 "Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 " Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
@@ -468,7 +467,6 @@ Plug 'theniceboy/argtextobj.vim'
 Plug 'rhysd/clever-f.vim'
 Plug 'chrisbra/NrrwRgn' "选中内容后:NR 会将选中的内容放到一个单独的缓冲区中 编辑完成后:w 将修改提交保存
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'szw/vim-maximizer'
 "Plug 'Konfekt/FastFold'
 "Plug 'Raimondi/delimitMate'
@@ -486,7 +484,7 @@ Plug 'skywind3000/asyncrun.vim'
 
 " Other visual enhancement
 Plug 'ryanoasis/vim-devicons'
-Plug 'luochen1990/rainbow'
+"Plug 'luochen1990/rainbow'
 Plug 'mg979/vim-xtabline'
 Plug 'wincent/terminus'
 
@@ -527,8 +525,8 @@ set background=dark
 "let g:one_allow_italics = 1
 "color molokai
 "color deus
-"color onedark
-color gruvbox
+color onedark
+"color gruvbox
 "let ayucolor="light"
 "color ayu
 "color xcodelighthc
@@ -536,7 +534,32 @@ color gruvbox
 "set cursorcolumn
 hi NonText ctermfg=gray guifg=grey10
 let g:molokai_original = 1
+
+nmap <LEADER>p :VCoolor<CR>
+"let g:vcoolor_custom_picker = '/usr/bin/gcolor2'
+" vue设置
+autocmd FileType vue syntax sync fromstart
+function! NERDCommenter_before()
+  if &ft == 'vue'
+    let g:ft = 'vue'
+    let stack = synstack(line('.'), col('.'))
+    if len(stack) > 0
+      let syn = synIDattr((stack)[0], 'name')
+      if len(syn) > 0
+        exe 'setf ' . substitute(tolower(syn), '^vue_', '', '')
+      endif
+    endif
+  endif
+endfunction
+
+function! NERDCommenter_after()
+  if g:ft == 'vue'
+    setf vue
+    let g:ft = ''
+  endif
+endfunction
 " ===================== Start of Plugin Settings =====================
+
 
 
 " ===
@@ -703,23 +726,62 @@ let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 
 
 " ===
-" === Leaderf
+" === FZF
 " ===
 
-noremap <silent> <C-p> :Leaderf file<CR>
-noremap <silent> <C-h> :Leaderf mru<CR>
-noremap <silent> <C-b> :Leaderf buffer<CR>
-noremap <silent> <C-w> :Leaderf rg<CR>
-noremap <silent> <c-f> :Leaderf function<CR>
-" noremap <silent> <C-p> :Files<CR>
-" noremap <silent> <C-f> :Rg<CR>
-" noremap <silent> <C-h> :History<CR>
-" noremap <silent> <C-l> :Lines<CR>
-" noremap <silent> <C-w> :Buffers<CR>
+
+
+" An action can be a reference to a function that processes selected lines
+function! s:build_quickfix_list(lines)
+  call setqflist(map(copy(a:lines), '{ "filename": v:val }'))
+  copen
+  cc
+endfunction
+
+let g:fzf_action = {
+  \ 'ctrl-q': function('s:build_quickfix_list'),
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+" Default fzf layout
+" - Popup window
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
+
+"let g:fzf_preview_window = 'right:60%'
+let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
+
+" Customize fzf colors to match your color scheme
+" - fzf#wrap translates this to a set of `--color` options
+"
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Label'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" Enable per-command history
+" - History files will be stored in the specified directory
+" - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
+"   'previous-history' instead of 'down' and 'up'.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+noremap <silent> <C-p> :Files<CR>
+noremap <silent> <C-f> :Rg<CR>
+noremap <silent> <C-h> :History<CR>
+noremap <silent> <C-l> :Lines<CR>
+noremap <silent> <C-w> :Buffers<CR>
 noremap <leader>; :History:<CR>
 
-let g:fzf_preview_window = 'right:60%'
-let g:fzf_commits_log_options = '--graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr"'
 
 function! s:list_buffers()
   redir => list
@@ -738,8 +800,6 @@ command! BD call fzf#run(fzf#wrap({
   \ 'options': '--multi --reverse --bind ctrl-a:select-all+accept'
 \}))
 
-
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.8 } }
 
 
 
@@ -1017,6 +1077,8 @@ sign define vimspectorPC text=🔶 texthl=SpellBad
 " ===
 "let g:vmt_auto_update_on_save = 0
 "let g:vmt_dont_insert_fence = 1
+
+nnoremap toc :GenTocGFM<CR>
 let g:vmt_cycle_list_item_markers = 1
 let g:vmt_fence_text = 'TOC'
 let g:vmt_fence_closing_text = '/TOC'
@@ -1046,8 +1108,6 @@ let g:rnvimr_layout = { 'relative': 'editor',
             \ 'row': 0,
             \ 'style': 'minimal' }
 let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
-
-
 
 " ===
 " === vim-illuminate
